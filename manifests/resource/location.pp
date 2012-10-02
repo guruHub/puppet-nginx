@@ -39,6 +39,7 @@ define nginx::resource::location(
   $location_alias     = undef,
   $option             = undef,
   $stub_status        = undef,
+  $custom_config      = undef,
   $location
 ) {
   File {

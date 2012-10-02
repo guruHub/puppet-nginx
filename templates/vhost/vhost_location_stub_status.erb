@@ -1,5 +1,5 @@
   location <%= location %> {
-    <% if ( is_hash(custom_config) ) -%>
+    <% if ( scope.is_hash(custom_config) ) -%>
       <% custom_config.each do |key,value| -%>
       <%= key %> = <%= value %>;
       <% end -%>

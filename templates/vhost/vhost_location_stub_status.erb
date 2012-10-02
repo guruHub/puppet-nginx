@@ -1,6 +1,8 @@
   location <%= location %> {
-    <% custom_config.each do |key,value| -%>
-    <%= key %> = <%= value %>;
+    <% if ( is_hash(custom_config) ) -%>
+      <% custom_config.each do |key,value| -%>
+      <%= key %> = <%= value %>;
+      <% end -%>
     <% end -%>
     stub_status on;
   }

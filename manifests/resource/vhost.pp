@@ -84,16 +84,29 @@ define nginx::resource::vhost(
 
   # Create the default location reference for the vHost
   nginx::resource::location {"${name}-default":
-    ensure             => $ensure,
-    vhost              => $name,
-    ssl                => $ssl,
-    location           => '/',
-    proxy              => $proxy,
-    proxy_read_timeout => $proxy_read_timeout,
-    www_root           => $www_root,
-    notify             => Class['nginx::service'],
+    ensure               => $ensure,
+    vhost                => $name,
+    ssl                  => $ssl,
+    location             => '/',
+    proxy                => $proxy,
+    proxy_read_timeout   => $proxy_read_timeout,
+    www_root             => $www_root,
+    notify               => Class['nginx::service'],
+    location_cfg_prepend => undef,
+    location_cfg_append  => undef,
   }
 
+  # Support location_cfg_prepend and location_cfg_append on default location created by vhost
+  if $location_cfg_prepend {
+    Nginx::Resource::Location["${name}-default"] {
+      location_cfg_prepend => $location_cfg_prepend
+    }
+  }
+  if $location_cfg_append {
+    Nginx::Resource::Location["${name}-default"] {
+      location_cfg_append => $location_cfg_append
+    }
+  }
   # Create a proper file close stub.
   file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-699":
     ensure  => $ensure ? {

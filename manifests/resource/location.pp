@@ -3,20 +3,20 @@
 # This definition creates a new location entry within a virtual host
 #
 # Parameters:
-#   [*ensure*]                - Enables or disables the specified location (present|absent)
-#   [*vhost*]                 - Defines the default vHost for this location entry to include with
-#   [*location*]              - Specifies the URI associated with this location entry
-#   [*www_root*]              - Specifies the location on disk for files to be read from. Cannot be set in conjunction with $proxy
-#   [*index_files*]           - Default index files for NGINX to read when traversing a directory
-#   [*proxy*]                 - Proxy server(s) for a location to connect to. Accepts a single value, can be used in conjunction
-#                               with nginx::resource::upstream
-#   [*proxy_read_timeout*]    - Override the default the proxy read timeout value of 90 seconds
-#   [*ssl*]                   - Indicates whether to setup SSL bindings for this location.
-#   [*location_alias*]        - Path to be used as basis for serving requests for this location
-#   [*stub_status*]           - If true it will point configure module stub_status to provide nginx stats on location
-#   [*custom_config_prepend*] - It expects a hash with custom directives to put before anything else inside location
-#   [*custom_config_append*]  - It expects a hash with custom directives to put after everything else inside location   
-#   [*option*]             - Reserved for future use
+#   [*ensure*]               - Enables or disables the specified location (present|absent)
+#   [*vhost*]                - Defines the default vHost for this location entry to include with
+#   [*location*]             - Specifies the URI associated with this location entry
+#   [*www_root*]             - Specifies the location on disk for files to be read from. Cannot be set in conjunction with $proxy
+#   [*index_files*]          - Default index files for NGINX to read when traversing a directory
+#   [*proxy*]                - Proxy server(s) for a location to connect to. Accepts a single value, can be used in conjunction
+#                              with nginx::resource::upstream
+#   [*proxy_read_timeout*]   - Override the default the proxy read timeout value of 90 seconds
+#   [*ssl*]                  - Indicates whether to setup SSL bindings for this location.
+#   [*location_alias*]       - Path to be used as basis for serving requests for this location
+#   [*stub_status*]          - If true it will point configure module stub_status to provide nginx stats on location
+#   [*location_cfg_prepend*] - It expects a hash with custom directives to put before anything else inside location
+#   [*location_cfg_append*]  - It expects a hash with custom directives to put after everything else inside location   
+#   [*option*]               - Reserved for future use
 #
 # Actions:
 #
@@ -37,26 +37,26 @@
 #    'deny'       => 'all'
 #  }
 #  nginx::resource::location { 'test2.local-bob':
-#    ensure               => present,
-#    www_root             => '/var/www/bob',
-#    location             => '/bob',
-#    vhost                => 'test2.local',
-#    custom_config_append => $my_config,
+#    ensure              => present,
+#    www_root            => '/var/www/bob',
+#    location            => '/bob',
+#    vhost               => 'test2.local',
+#    location_cfg_append => $my_config,
 #  }
 
 define nginx::resource::location(
-  $ensure                = present,
-  $vhost                 = undef,
-  $www_root              = undef,
-  $index_files           = ['index.html', 'index.htm', 'index.php'],
-  $proxy                 = undef,
-  $proxy_read_timeout    = $nginx::params::nx_proxy_read_timeout,
-  $ssl                   = false,
-  $location_alias        = undef,
-  $option                = undef,
-  $stub_status           = undef,
-  $custom_config_prepend = undef,
-  $custom_config_append = undef,
+  $ensure               = present,
+  $vhost                = undef,
+  $www_root             = undef,
+  $index_files          = ['index.html', 'index.htm', 'index.php'],
+  $proxy                = undef,
+  $proxy_read_timeout   = $nginx::params::nx_proxy_read_timeout,
+  $ssl                  = false,
+  $location_alias       = undef,
+  $option               = undef,
+  $stub_status          = undef,
+  $location_cfg_prepend = undef,
+  $location_cfg_append  = undef,
   $location
 ) {
   File {

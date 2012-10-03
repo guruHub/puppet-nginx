@@ -3,8 +3,11 @@
     <% if ( custom_config != 'undef' ) -%>
 	custom_config != undef
     <% end -%>
-    <% if ( scope.function_is_hash(custom_config) ) %>
-	custom_config is hash
+    <% if ( scope.function_is_string(custom_config) ) %>
+	custom_config is string
+    <% end %>
+    <% if custom_config %>
+       custom_config exist!
     <% end %>
     custom_config='<%= custom_config %>'
     stub_status on;

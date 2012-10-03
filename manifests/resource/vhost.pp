@@ -94,8 +94,6 @@ define nginx::resource::vhost(
     proxy_read_timeout   => $proxy_read_timeout,
     www_root             => $www_root,
     notify               => Class['nginx::service'],
-    location_cfg_prepend => $location_cfg_prepend,
-    location_cfg_append  => $location_cfg_append,
   }
 
   # Support location_cfg_prepend and location_cfg_append on default location created by vhost

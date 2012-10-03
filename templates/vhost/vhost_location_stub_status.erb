@@ -1,6 +1,6 @@
   location <%= location %> {
     Debugging:
-    <% if ( custom_config != false ) -%>
+    <% if ( custom_config != undef ) -%>
 	custom_config != false
     <% end -%>
     custom_config='<%= custom_config %>'

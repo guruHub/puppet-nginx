@@ -1,13 +1,13 @@
   location <%= location %> {
 <% if @custom_config_prepend -%>
   <% custom_config_prepend.each do |key,value| %>
-    <%= key %> = <%= value %>;
+    <%= key %> <%= value %>;
   <% end -%>
 <% end -%>
     stub_status on;
 <% if @custom_config_append -%>
   <% custom_config_append.each do |key,value| %>
-    <%= key %> = <%= value %>;
+    <%= key %> <%= value %>;
   <% end -%>
 <% end -%>
   }

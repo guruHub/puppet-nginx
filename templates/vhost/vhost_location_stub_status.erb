@@ -1,7 +1,7 @@
   location <%= location %> {
     Debugging:
     <% if ( custom_config != undef ) -%>
-	custom_config != false
+	custom_config != undef
     <% end -%>
     custom_config='<%= custom_config %>'
     stub_status on;

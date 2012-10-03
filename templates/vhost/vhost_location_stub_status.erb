@@ -1,17 +1,8 @@
   location <%= location %> {
-    Debugging:
--------------------------
-    <% if ( custom_config != 'undef' ) -%> custom_config != 'undef' <% else %> custom_config == 'undef' <% end -%>
--------------------------
-    <% if ( scope.function_is_string( location ) ) %>location is string<% else %>location is not a string<% end %>
--------------------------
-    <% if custom_config %>custom_config exist!<% else %>custom_config does not exist!<% end %>
--------------------------
-    <% if scope.lookupvar("custom_config") %>custom_config exist on lookupvar!<% else %>custom_config does not exist on lookupvar!<% end %>
--------------------------      
-    custom_config='<%= custom_config %>'
--------------------------
-    <% if @custom_config %>custom_config is defined<% else %>custom_config is not defined<% end %>
---------------------------
+    <% if @custom_config -%>
+      <% custom_config.each do |key,value| -%>
+      <%= key %> = <%= value %>;
+      <% end -%>
+    <% end -%>
     stub_status on;
   }

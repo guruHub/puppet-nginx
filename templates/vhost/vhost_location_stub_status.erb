@@ -11,7 +11,7 @@
 -------------------------      
     custom_config='<%= custom_config %>'
 -------------------------
-    <% if scope.lookupvar("custom_config").length > 0 %>custom_config is > 0<% else %>custom_config does not exist<% end %>
+    <% if @custom_config %>custom_config is defined<% else %>custom_config is not defined<% end %>
 --------------------------
     stub_status on;
   }

@@ -3,7 +3,7 @@
     <% if ( custom_config != 'undef' ) -%>
 	custom_config != undef
     <% end -%>
-    <% if ( scope.function_is_string(custom_config) ) %>
+    <% if ( scope.function_is_string( location ) ) %>
 	custom_config is string
     <% end %>
     <% if custom_config %>

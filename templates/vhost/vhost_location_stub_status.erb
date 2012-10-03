@@ -1,4 +1,6 @@
   location <%= location %> {
-    <% if @custom_config -%><% custom_config.each do |key,value| -%><%= key %> = <%= value %>;<% end %><% end -%>
+    <% if @custom_config -%>
+      <% custom_config.each do |key,value| %><%= key %> = <%= value %>;<% end %>
+    <% end -%>
     stub_status on;
   }

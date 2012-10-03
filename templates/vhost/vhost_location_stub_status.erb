@@ -1,8 +1,8 @@
   location <%= location %> {
+    Debugging:
     <% if ( custom_config != false ) -%>
-      <% custom_config.each do |key,value| -%>
-      <%= key %> = <%= value %>;
-      <% end -%>
+	custom_config != false
     <% end -%>
+    custom_config='<%= custom_config %>'
     stub_status on;
   }

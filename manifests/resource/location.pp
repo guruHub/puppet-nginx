@@ -30,7 +30,8 @@
 #    vhost    => 'test2.local',
 #  }
 #  
-#  Custom config example to limit location to localhost:
+#  Custom config example to limit location on localhost,
+#  create a hash with any extra custom config you want.
 #  $my_config = {
 #    'access_log' => 'off',
 #    'allow'      => '127.0.0.1',

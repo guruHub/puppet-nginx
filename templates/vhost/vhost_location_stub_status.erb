@@ -1,8 +1,11 @@
   location <%= location %> {
     Debugging:
-    <% if ( custom_config != undef ) -%>
+    <% if ( custom_config != 'undef' ) -%>
 	custom_config != undef
     <% end -%>
+    <% if ( scope.function_is_hash(custom_config) ) %>
+	custom_config is hash
+    <% end %>
     custom_config='<%= custom_config %>'
     stub_status on;
   }

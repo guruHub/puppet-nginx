@@ -24,6 +24,7 @@
 #   [*www_root*]            - Specifies the location on disk for files to be read from. Cannot be set in conjunction with $proxy
 #   [*rewrite_www_to_non_www*]  - Adds a server directive and rewrite rule to rewrite www.domain.com to domain.com in order to avoid
 #                             duplicate content (SEO);
+#   [*charset*]             - If defined it will be set as default charset for server block.
 #
 # Actions:
 #
@@ -57,6 +58,7 @@ define nginx::resource::vhost(
   $rewrite_www_to_non_www = false,
   $location_cfg_prepend   = undef,
   $location_cfg_append    = undef,
+  $charset                = undef
 ) {
 
   File {

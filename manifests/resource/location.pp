@@ -17,6 +17,7 @@
 #   [*location_cfg_prepend*] - It expects a hash with custom directives to put before anything else inside location
 #   [*location_cfg_append*]  - It expects a hash with custom directives to put after everything else inside location   
 #   [*option*]               - Reserved for future use
+#   [*fpm*]                  - FPM backend to setup, will include a different template, requires $www_root
 #
 # Actions:
 #
@@ -58,7 +59,8 @@ define nginx::resource::location(
   $stub_status          = undef,
   $location_cfg_prepend = undef,
   $location_cfg_append  = undef,
-  $location
+  $location,
+  $fpm                  = undef
 ) {
   File {
     owner  => 'root',
@@ -80,6 +82,8 @@ define nginx::resource::location(
     $content_real = template('nginx/vhost/vhost_location_alias.erb')
   } elsif ($stub_status != undef) {
     $content_real = template('nginx/vhost/vhost_location_stub_status.erb')
+  } elsif ($fpm != undef) {
+    $content_real = template('nginx/vhost/vhost_location_fpm.erb')
   } else {
     $content_real = template('nginx/vhost/vhost_location_directory.erb')
   }

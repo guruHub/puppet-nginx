@@ -1,0 +1,28 @@
+  location ~ "<%= location %>" {
+<% if @location_cfg_prepend -%><% location_cfg_prepend.each do |key,value| -%>
+    <%= key %> <%= value %>;
+<% end -%><% end -%>
+    set $script $uri;
+    set $path_info "/";
+
+    root <%= www_root %>;
+
+    if ($uri ~ "^(.+\.php)($|/)") {
+        set $script $1;
+    }
+
+    if ($uri ~ "^(.+\.php)(/.+)") {
+        set $script $1;
+        set $path_info $2;
+    }
+
+    include /etc/nginx/fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$script;
+    fastcgi_param SCRIPT_NAME $script;
+    fastcgi_param PATH_INFO $path_info;
+    fastcgi_pass <%= fpm %>;
+
+<% if @location_cfg_append -%><% location_cfg_append.each do |key,value| -%>
+    <%= key %> <%= value %>;
+<% end -%><% end -%>
+  }

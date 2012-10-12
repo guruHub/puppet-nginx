@@ -28,6 +28,7 @@ class nginx::params {
   $nx_gzip               = on
   $nx_geoip_city_src     = false
   $nx_geoip_country_src  = false
+  $nx_debian_package     = 'nginx'
 
   $nx_proxy_redirect          = off
   $nx_proxy_set_header        = [

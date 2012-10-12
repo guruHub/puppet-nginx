@@ -13,8 +13,10 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class nginx::package::debian {
-  package { 'nginx':
+class nginx::package::debian(
+  $debian_package = $nginx::params::nx_debian_package
+) {
+  package { $debian_package:
     ensure => present,
   }
 }

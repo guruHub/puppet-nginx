@@ -13,7 +13,9 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class nginx::package {
+class nginx::package(
+  $debian_package = $nginx::params::nx_debian_package
+) {
   anchor { 'nginx::package::begin': }
   anchor { 'nginx::package::end': }
 
@@ -26,8 +28,9 @@ class nginx::package {
     }
     debian,ubuntu: {
       class { 'nginx::package::debian': 
-        require => Anchor['nginx::package::begin'],
-        before  => Anchor['nginx::package::end'],
+        debian_package => $debian_package,
+        require        => Anchor['nginx::package::begin'],
+        before         => Anchor['nginx::package::end'],
       }
     }
     opensuse,suse: {

@@ -36,12 +36,14 @@ class nginx (
   $configtest_enable  = $nginx::params::nx_configtest_enable,
   $service_restart    = $nginx::params::nx_service_restart,
   $geoip_city_src     = $nginx::params::nx_geoip_city_src,
-  $geoip_country_src  = $nginx::params::nx_geoip_country_src
+  $geoip_country_src  = $nginx::params::nx_geoip_country_src,
+  $debian_package     = $nginx::params::nx_debian_package
 ) inherits nginx::params {
 
   include stdlib
 
   class { 'nginx::package':
+    debian_package = $debian_package,
     notify => Class['nginx::service'],
   }
 

@@ -16,7 +16,8 @@
 class nginx::package::debian(
   $debian_package = $nginx::params::nx_debian_package
 ) {
-  package { $debian_package:
+  package { 'nginx':
+    name => $debian_package,
     ensure => present,
   }
 }

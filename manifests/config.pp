@@ -17,7 +17,9 @@ class nginx::config(
   $worker_processes    = $nginx::params::nx_worker_processes,
   $worker_connections  = $nginx::params::nx_worker_connections,
   $proxy_set_header    = $nginx::params::nx_proxy_set_header,
-  $confd_purge         = $nginx::params::nx_confd_purge
+  $confd_purge         = $nginx::params::nx_confd_purge,
+  $geoip_city_src      = $nginx::params::nx_geoip_city_src,
+  $geoip_country_src   = $nginx::params::nx_geoip_country_src,
 ) inherits nginx::params {
   File {
     owner => 'root',
@@ -34,12 +36,27 @@ class nginx::config(
   }
   if $confd_purge == true {
     File["${nginx::params::nx_conf_dir}/conf.d"] {
-      ignore => "vhost_autogen.conf",
-      purge => true,
+      ignore  => "vhost_autogen.conf",
+      purge   => true,
       recurse => true,
     }
   }
 
+  if $geoip_city_src != false {
+    $geoip_dat_destination = "${nginx::params::nx_conf_dir}/geoip_city.dat"
+    $geoip_dat_source      = $geoip_city_src
+    $geoip_dat_type        = 'geoip_city'
+  } elsif $geoip_country_src != false {
+    $geoip_dat_destination = "${nginx::params::nx_conf_dir}/geoip_country.dat"
+    $geoip_dat_source      = $geoip_country_src
+    $geoip_dat_type        = 'geoip_country'
+  }
+  if $geoip_dat_source {
+    file { $geoip_dat_destination :
+      ensure => file,
+      source => $geoip_dat_source
+    }
+  }
 
   file { "${nginx::config::nx_run_dir}":
     ensure => directory,
@@ -74,4 +91,5 @@ class nginx::config(
     purge   => true,
     recurse => true,
   }
+
 }

@@ -34,7 +34,9 @@ class nginx (
   $proxy_set_header   = $nginx::params::nx_proxy_set_header,
   $confd_purge        = $nginx::params::nx_confd_purge,
   $configtest_enable  = $nginx::params::nx_configtest_enable,
-  $service_restart    = $nginx::params::nx_service_restrart
+  $service_restart    = $nginx::params::nx_service_restart,
+  $geoip_city_src     = $nginx::params::nx_geoip_city_src,
+  $geoip_country_src  = $nginx::params::nx_geoip_country_src
 ) inherits nginx::params {
 
   include stdlib
@@ -48,6 +50,8 @@ class nginx (
     worker_connections 	=> $worker_connections,
     proxy_set_header 	=> $proxy_set_header,
     confd_purge         => $confd_purge,
+    geoip_city_src      => $geoip_city_src,
+    geoip_country_src   => $geoip_country_src,
     require 		=> Class['nginx::package'],
     notify  		=> Class['nginx::service'],
   }

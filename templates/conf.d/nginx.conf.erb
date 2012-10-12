@@ -29,5 +29,8 @@ http {
   gzip_disable "MSIE [1-6]\.(?!.*SV1)";
   <% end %>
 
+  <% if @geoip_dat_destination %>
+  <%= geoip_dat_type %> <%= geoip_dat_destination %>;
+  <% end %>
   include /etc/nginx/conf.d/*.conf;
 }

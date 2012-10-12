@@ -26,6 +26,8 @@ class nginx::params {
   $nx_keepalive_timeout  = 65
   $nx_tcp_nodelay        = on
   $nx_gzip               = on
+  $nx_geoip_city_src     = false
+  $nx_geoip_country_src  = false
 
   $nx_proxy_redirect          = off
   $nx_proxy_set_header        = [

@@ -9,7 +9,7 @@ proxy_buffers           <%= scope.lookupvar('nginx::params::nx_proxy_buffers') %
 proxy_set_header        <%= header %>;
 <% end %>
 <% if @geoip_city_src %>
-proxy_set_header geoip_city_country_name $geoip_city_country_name;
-proxy_set_header geoip_region $geoip_region;
-proxy_set_header geoip_city $geoip_city;
+proxy_set_header HTTP_GEOIP_CITY_COUNTRY_NAME $geoip_city_country_name;
+proxy_set_header HTTP_GEOIP_REGION $geoip_region;
+proxy_set_header HTTP_GEOIP_CITY $geoip_city;
 <% end %>

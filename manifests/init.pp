@@ -43,8 +43,8 @@ class nginx (
   include stdlib
 
   class { 'nginx::package':
-    debian_package = $debian_package,
-    notify => Class['nginx::service'],
+    debian_package => $debian_package,
+    notify         => Class['nginx::service'],
   }
 
   class { 'nginx::config':

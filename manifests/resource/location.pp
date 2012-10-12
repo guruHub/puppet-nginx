@@ -61,7 +61,7 @@ define nginx::resource::location(
   $location_cfg_append  = undef,
   $location,
   $fpm                  = undef,
-  $geoip_enabled        = undef
+  $geoip_enable         = undef
 ) {
   File {
     owner  => 'root',

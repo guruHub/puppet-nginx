@@ -20,6 +20,12 @@
     fastcgi_param SCRIPT_FILENAME $document_root$script;
     fastcgi_param SCRIPT_NAME $script;
     fastcgi_param PATH_INFO $path_info;
+    <% if @geoip_enable %>
+    fastcgi_param GEOIP_CITY_COUNTRY_NAME $geoip_city_country_name;
+    fastcgi_param GEOIP_REGION $geoip_region;
+    fastcgi_param GEOIP_CITY $geoip_city;
+    <% end %>
+
     fastcgi_pass <%= fpm %>;
 
 <% if @location_cfg_append -%><% location_cfg_append.each do |key,value| -%>

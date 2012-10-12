@@ -31,11 +31,6 @@ http {
 
   <% if @geoip_dat_destination %>
   <%= geoip_dat_type %> <%= geoip_dat_destination %>;
-    <% if @geoip_city_src %>
-    add_header geoip_city_country_name $geoip_city_country_name;
-    add_header geoip_region $geoip_region;
-    add_header geoip_city $geoip_city;
-    <% end %>
   <% end -%>
   include /etc/nginx/conf.d/*.conf;
 }

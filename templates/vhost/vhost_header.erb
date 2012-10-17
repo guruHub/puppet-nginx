@@ -9,7 +9,7 @@ server {
   access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.access.log; 
   <% else %>
   <% access_logs.sort.each do |logfile,logformat| %>
-  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= logfile %>.access.log <%= logformat %>; <% end %>
+  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= logfile %>.access.log <%= logformat %>;<% end %>
   <% end -%>
   <% if @error_log -%>
   error_log             <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.error.log;

@@ -9,3 +9,7 @@ server {
   <% if @charset -%>
   charset                <%= charset %>;
   <% end -%>
+  if <% @extra_directives -%>
+  <% extra_directives.each do |i| %> <%= i %>; <% end %>
+  <% end -%>
+  

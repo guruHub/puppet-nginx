@@ -25,6 +25,7 @@
 #   [*rewrite_www_to_non_www*]  - Adds a server directive and rewrite rule to rewrite www.domain.com to domain.com in order to avoid
 #                             duplicate content (SEO);
 #   [*charset*]             - If defined it will be set as default charset for server block.
+#   [*extra_directives*]    - Useful to set extra settings for vhosts like logs or custom nginx modules directives.
 #
 # Actions:
 #
@@ -58,6 +59,7 @@ define nginx::resource::vhost(
   $rewrite_www_to_non_www = false,
   $location_cfg_prepend   = undef,
   $location_cfg_append    = undef,
+  $extra_directives       = undef,
   $charset                = undef
 ) {
 

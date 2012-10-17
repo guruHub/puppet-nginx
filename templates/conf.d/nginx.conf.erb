@@ -32,5 +32,7 @@ http {
   <% if @geoip_dat_destination %>
   <%= geoip_dat_type %> <%= geoip_dat_destination %>;
   <% end -%>
+
   include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/vhost_autogen.conf;
 }

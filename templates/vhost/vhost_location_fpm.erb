@@ -1,6 +1,6 @@
   location ~ "<%= location %>" {
-<% if @location_cfg_prepend -%><% location_cfg_prepend.sort.each do |key,value| -%>
-    <%= key %> <%= value %>;
+<% if @location_cfg_prepend -%><% location_cfg_prepend.each do |i| -%>
+    <%= i %>;
 <% end -%><% end -%>
     set $script $uri;
     set $path_info "/";
@@ -29,7 +29,7 @@
 
     fastcgi_pass <%= fpm %>;
 
-<% if @location_cfg_append -%><% location_cfg_append.sort.each do |key,value| -%>
-    <%= key %> <%= value %>;
+<% if @location_cfg_append -%><% location_cfg_append.each do |i| -%>
+    <%= i %>;
 <% end -%><% end -%>
   }

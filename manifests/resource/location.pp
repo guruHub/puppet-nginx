@@ -14,8 +14,8 @@
 #   [*ssl*]                  - Indicates whether to setup SSL bindings for this location.
 #   [*location_alias*]       - Path to be used as basis for serving requests for this location
 #   [*stub_status*]          - If true it will point configure module stub_status to provide nginx stats on location
-#   [*location_cfg_prepend*] - It expects a hash with custom directives to put before anything else inside location
-#   [*location_cfg_append*]  - It expects a hash with custom directives to put after everything else inside location   
+#   [*location_cfg_prepend*] - It expects an array with custom directives to put before anything else inside location
+#   [*location_cfg_append*]  - It expects an array with custom directives to put after everything else inside location   
 #   [*option*]               - Reserved for future use
 #   [*fpm*]                  - FPM backend to setup, will include a different template, requires $www_root
 #
@@ -32,12 +32,12 @@
 #  }
 #  
 #  Custom config example to limit location on localhost,
-#  create a hash with any extra custom config you want.
-#  $my_config = {
-#    'access_log' => 'off',
-#    'allow'      => '127.0.0.1',
-#    'deny'       => 'all'
-#  }
+#  create an array with any extra custom config you want.
+#  $my_config = [
+#    'access_log off',
+#    'allow 127.0.0.1',
+#    'deny all'
+#  ]
 #  nginx::resource::location { 'test2.local-bob':
 #    ensure              => present,
 #    www_root            => '/var/www/bob',

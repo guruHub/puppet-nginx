@@ -25,7 +25,10 @@
 #   [*rewrite_www_to_non_www*]  - Adds a server directive and rewrite rule to rewrite www.domain.com to domain.com in order to avoid
 #                             duplicate content (SEO);
 #   [*charset*]             - If defined it will be set as default charset for server block.
-#   [*extra_directives*]    - Useful to set extra settings for vhosts like logs or custom nginx modules directives.
+#   [*errorlog*]            - If true it will add an error_log directive to $name-error.log using default format on default log_dir.
+#   [*accesslogs*]          - This module always set by default an access log "${name}-access.log" using default format on default 
+#                             log_dir. With this setting you can override default log with custom ones, it expects a hash where each
+#                             key is the name of the log and value the format for it.
 #
 # Actions:
 #
@@ -39,6 +42,15 @@
 #    ssl_cert => '/tmp/server.crt',
 #    ssl_key  => '/tmp/server.pem',
 #  }
+#
+# access_logs hash example 
+# Given: $access_logs = { 'proxy-traffic' => 'proxyformat', 'geodata' => 'combined-geo' }
+# Vhost will end with:
+#   access_log /path/to/logs/proxy-traffic.access.log proxyformat;
+#   access_log /path/to/logs/geodata.access.log combined-geo;
+# Notice: You only need to define access_logs if you use custom formats. If undefined module will create basic logging for you.
+# 
+#
 define nginx::resource::vhost(
   $ensure                 = 'enable',
   $listen_ip              = '*',
@@ -59,7 +71,8 @@ define nginx::resource::vhost(
   $rewrite_www_to_non_www = false,
   $location_cfg_prepend   = undef,
   $location_cfg_append    = undef,
-  $extra_directives       = undef,
+  $error_log              = undef,
+  $access_logs            = undef,
   $charset                = undef
 ) {
 

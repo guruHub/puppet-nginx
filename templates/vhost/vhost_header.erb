@@ -5,11 +5,15 @@ server {
   listen [<%= ipv6_listen_ip %>]:<%= ipv6_listen_port %> <% if @ipv6_listen_options %><%= ipv6_listen_options %><% end %> ipv6only=on;
   <% end %>
   server_name           <%= rewrite_www_to_non_www ? name.gsub(/^www\./, '') : server_name.join(" ") %>;
-  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.access.log;
+  <% if ! @access_logs %>
+  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.access.log; 
+  <% else %>
+  <% access_logs.sort.each do |logfile,logformat| %>access_log <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= logfile %>.access.log <%= logformat %>; <% end %>
+  <% end -%>
+  <% if @error_log -%>
+  error_log             <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.error.log;
+  <% end -%>
   <% if @charset -%>
   charset                <%= charset %>;
   <% end -%>
-  <% if @extra_directives -%>
-  <% extra_directives.each do |i| %> <%= i %>; <% end %>
-  <% end %>
   

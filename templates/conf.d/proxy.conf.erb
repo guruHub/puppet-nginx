@@ -11,6 +11,6 @@ proxy_set_header        <%= header %>;
 <% if @geoip_city_src %>
 proxy_set_header Geo-Country-Code $geoip_city_country_code;
 proxy_set_header Geo-Country-Name $geoip_city_country_name;
-proxy_set_header Geo-City-Region $geoip_region;
+proxy_set_header Geo-Region $geoip_region;
 proxy_set_header Geo-City $geoip_city;
 <% end %>

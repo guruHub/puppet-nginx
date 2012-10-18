@@ -1,4 +1,4 @@
-  location ~ "<%= location %>" {
+  location <%= location %> {
 <% if @location_cfg_prepend -%><% location_cfg_prepend.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>

@@ -47,6 +47,7 @@ class nginx::params {
   $nx_proxy_read_timeout      = '90'
   $nx_proxy_buffers           = '32 4k'
   $nx_proxy_buffer_size       = false
+  $nx_proxy_ignore_headers    = false
   $nx_real_ip_header          = false
   $nx_real_ips                = false
 

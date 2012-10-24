@@ -48,7 +48,8 @@ class nginx (
   $proxy_send_timeout      = $nginx::params::nx_proxy_send_timeout,
   $proxy_read_timeout      = $nginx::params::nx_proxy_read_timeout,
   $proxy_pass_headers      = $nginx::params::nx_proxy_pass_headers,
-  $proxy_buffer_size       = $nginx::params::nx_proxy_buffer_size
+  $proxy_buffer_size       = $nginx::params::nx_proxy_buffer_size,
+  $proxy_ignore_headers    = $nginx::params::nx_proxy_ignore_headers
 ) inherits nginx::params {
 
   include stdlib
@@ -76,6 +77,7 @@ class nginx (
     proxy_read_timeout      => $proxy_read_timeout,
     proxy_pass_headers      => $proxy_pass_headers,
     proxy_buffer_size       => $proxy_buffer_size,
+    proxy_ignore_headers    => $proxy_ignore_headers,
     require 		    => Class['nginx::package'],
     notify  		    => Class['nginx::service'],
   }

@@ -22,6 +22,7 @@ class nginx::config(
   $geoip_country_src          = $nginx::params::nx_geoip_country_src,
   $real_ip_header             = $nginx::params::nx_real_ip_header,
   $real_ips                   = $nginx::params::nx_real_ips,
+  $keepalive_timeout          = $nginx::params::nx_keepalive_timeout,
   $proxy_redirect             = $nginx::params::nx_proxy_redirect,
   $client_max_body_size       = $nginx::params::nx_client_max_body_size,
   $client_body_buffer_size    = $nginx::params::nx_client_body_buffer_size,

@@ -47,7 +47,8 @@ class nginx (
   $proxy_connect_timeout   = $nginx::params::nx_proxy_connect_timeout,
   $proxy_send_timeout      = $nginx::params::nx_proxy_send_timeout,
   $proxy_read_timeout      = $nginx::params::nx_proxy_read_timeout,
-  $proxy_pass_headers      = $nginx::params::nx_proxy_pass_headers
+  $proxy_pass_headers      = $nginx::params::nx_proxy_pass_headers,
+  $proxy_buffer_size       = $nginx::params::nx_proxy_buffer_size
 ) inherits nginx::params {
 
   include stdlib
@@ -58,20 +59,25 @@ class nginx (
   }
 
   class { 'nginx::config':
-    worker_processes 	  => $worker_processes,
-    worker_connections 	  => $worker_connections,
-    proxy_set_header 	  => $proxy_set_header,
-    confd_purge           => $confd_purge,
-    geoip_city_src        => $geoip_city_src,
-    geoip_country_src     => $geoip_country_src,
-    real_ip_header        => $real_ip_header,
-    real_ips              => $real_ips,
-    proxy_connect_timeout => $proxy_connect_timeout,
-    proxy_send_timeout    => $proxy_send_timeout,
-    proxy_read_timeout    => $proxy_read_timeout,
-    proxy_pass_headers    => $proxy_pass_headers,
-    require 		  => Class['nginx::package'],
-    notify  		  => Class['nginx::service'],
+    worker_processes 	    => $worker_processes,
+    worker_connections 	    => $worker_connections,
+    proxy_set_header 	    => $proxy_set_header,
+    confd_purge             => $confd_purge,
+    geoip_city_src          => $geoip_city_src,
+    geoip_country_src       => $geoip_country_src,
+    real_ip_header          => $real_ip_header,
+    real_ips                => $real_ips,
+    proxy_redirect          => $proxy_redirect,
+    client_max_body_size    => $client_max_body_size,   
+    client_body_buffer_size => $client_body_buffer_size,
+    proxy_buffers           => $proxy_buffers,
+    proxy_connect_timeout   => $proxy_connect_timeout,
+    proxy_send_timeout      => $proxy_send_timeout,
+    proxy_read_timeout      => $proxy_read_timeout,
+    proxy_pass_headers      => $proxy_pass_headers,
+    proxy_buffer_size       => $proxy_buffer_size,
+    require 		    => Class['nginx::package'],
+    notify  		    => Class['nginx::service'],
   }
 
   class { 'nginx::service': 

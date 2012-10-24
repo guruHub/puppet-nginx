@@ -29,8 +29,8 @@ class nginx::config(
   $proxy_connect_timeout   = $nginx::params::nx_proxy_connect_timeout,
   $proxy_send_timeout      = $nginx::params::nx_proxy_send_timeout,
   $proxy_read_timeout      = $nginx::params::nx_proxy_read_timeout,
-  $proxy_pass_headers      = $nginx::params::nx_proxy_pass_headers
-
+  $proxy_pass_headers      = $nginx::params::nx_proxy_pass_headers,
+  $proxy_buffer_size       = $nginx::params::nx_proxy_buffer_size
 ) inherits nginx::params {
   File {
     owner => 'root',

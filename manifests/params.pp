@@ -49,6 +49,7 @@ class nginx::params {
   $nx_proxy_buffer_size          = false
   $nx_proxy_ignore_headers       = false
   $nx_proxy_temp_file_write_size = false
+  $nx_proxy_cache_use_stale      = false
   $nx_real_ip_header             = false
   $nx_real_ips                   = false
 

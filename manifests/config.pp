@@ -33,7 +33,8 @@ class nginx::config(
   $proxy_buffer_size          = $nginx::params::nx_proxy_buffer_size,
   $proxy_ignore_headers       = $nginx::params::nx_proxy_ignore_headers,
   $proxy_temp_file_write_size = $nginx::params::nx_proxy_temp_file_write_size,
-  $proxy_busy_buffers_size    = $nginx::params::nx_proxy_busy_buffers_size
+  $proxy_busy_buffers_size    = $nginx::params::nx_proxy_busy_buffers_size,
+  $proxy_cache_use_stale      = $nginx::params::nx_proxy_cache_use_stale
 ) inherits nginx::params {
   File {
     owner => 'root',

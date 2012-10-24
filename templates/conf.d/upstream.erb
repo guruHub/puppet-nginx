@@ -1,4 +1,5 @@
 upstream <%= name %> {
+  <% if @fair_enabled %>fair;<% end -%>
   <% members.each do |i| %>
   server <%= i %>;
   <% end %>

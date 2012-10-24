@@ -5,6 +5,8 @@
 # Parameters:
 #   [*ensure*]      - Enables or disables the specified location (present|absent)
 #   [*members*]     - Array of member URIs for NGINX to connect to. Must follow valid NGINX syntax.
+#   [*fair_enabled*]- Enables or disable the upstream fair use. You need upstream-fair module to use this.
+#   [*keepalive*]   - Sets keepalive between nginx proxy and upstream (Required version 1.1.4+), unset by default.
 #
 # Actions:
 #
@@ -21,7 +23,9 @@
 #  }
 define nginx::resource::upstream (
   $ensure = 'present',
-  $members
+  $members,
+  $fair_enabled = false,
+  $keepalive = false
 ) {
   File {
     owner => 'root',

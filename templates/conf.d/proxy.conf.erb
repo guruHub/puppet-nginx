@@ -7,6 +7,7 @@ proxy_read_timeout      <%= proxy_read_timeout %>;
 proxy_buffers           <%= proxy_buffers %>;
 <% if @proxy_buffer_size %>proxy_buffer_size       <%= proxy_buffer_size %><% end %>
 <% if @proxy_ignore_headers %>proxy_ignore_headers    <% proxy_ignore_headers.each do |ignore_header| %> <%= ignore_header %><% end -%>;<% end %>
+<% if @proxy_temp_file_write_size %>proxy_temp_file_write_size       <%= proxy_temp_file_write_size %><% end %>
 <% proxy_set_header.each do |header| %>
 proxy_set_header        <%= header %>;
 <% end %>

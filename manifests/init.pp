@@ -29,17 +29,25 @@
 #   include nginx
 # }
 class nginx (
-  $worker_processes   = $nginx::params::nx_worker_processes,
-  $worker_connections = $nginx::params::nx_worker_connections,
-  $proxy_set_header   = $nginx::params::nx_proxy_set_header,
-  $confd_purge        = $nginx::params::nx_confd_purge,
-  $configtest_enable  = $nginx::params::nx_configtest_enable,
-  $service_restart    = $nginx::params::nx_service_restart,
-  $geoip_city_src     = $nginx::params::nx_geoip_city_src,
-  $geoip_country_src  = $nginx::params::nx_geoip_country_src,
-  $debian_package     = $nginx::params::nx_debian_package,
-  $real_ip_header     = $nginx::params::nx_real_ip_header,
-  $real_ips           = $nginx::params::nx_real_ips
+  $worker_processes        = $nginx::params::nx_worker_processes,
+  $worker_connections      = $nginx::params::nx_worker_connections,
+  $proxy_set_header        = $nginx::params::nx_proxy_set_header,
+  $confd_purge             = $nginx::params::nx_confd_purge,
+  $configtest_enable       = $nginx::params::nx_configtest_enable,
+  $service_restart         = $nginx::params::nx_service_restart,
+  $geoip_city_src          = $nginx::params::nx_geoip_city_src,
+  $geoip_country_src       = $nginx::params::nx_geoip_country_src,
+  $debian_package          = $nginx::params::nx_debian_package,
+  $real_ip_header          = $nginx::params::nx_real_ip_header,
+  $real_ips                = $nginx::params::nx_real_ips,
+  $proxy_redirect          = $nginx::params::nx_proxy_redirect,
+  $client_max_body_size    = $nginx::params::nx_client_max_body_size,
+  $client_body_buffer_size = $nginx::params::nx_client_body_buffer_size,
+  $proxy_buffers           = $nginx::params::nx_proxy_buffers,
+  $proxy_connect_timeout   = $nginx::params::nx_proxy_connect_timeout,
+  $proxy_send_timeout      = $nginx::params::nx_proxy_send_timeout,
+  $proxy_read_timeout      = $nginx::params::nx_proxy_read_timeout,
+  $proxy_pass_headers      = $nginx::params::nx_proxy_pass_headers
 ) inherits nginx::params {
 
   include stdlib
@@ -50,16 +58,20 @@ class nginx (
   }
 
   class { 'nginx::config':
-    worker_processes 	=> $worker_processes,
-    worker_connections 	=> $worker_connections,
-    proxy_set_header 	=> $proxy_set_header,
-    confd_purge         => $confd_purge,
-    geoip_city_src      => $geoip_city_src,
-    geoip_country_src   => $geoip_country_src,
-    real_ip_header      => $real_ip_header,
-    real_ips            => $real_ips,
-    require 		=> Class['nginx::package'],
-    notify  		=> Class['nginx::service'],
+    worker_processes 	  => $worker_processes,
+    worker_connections 	  => $worker_connections,
+    proxy_set_header 	  => $proxy_set_header,
+    confd_purge           => $confd_purge,
+    geoip_city_src        => $geoip_city_src,
+    geoip_country_src     => $geoip_country_src,
+    real_ip_header        => $real_ip_header,
+    real_ips              => $real_ips,
+    proxy_connect_timeout => $proxy_connect_timeout,
+    proxy_send_timeout    => $proxy_send_timeout,
+    proxy_read_timeout    => $proxy_read_timeout,
+    proxy_pass_headers    => $proxy_pass_headers,
+    require 		  => Class['nginx::package'],
+    notify  		  => Class['nginx::service'],
   }
 
   class { 'nginx::service': 

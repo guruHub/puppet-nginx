@@ -35,6 +35,8 @@ class nginx::params {
     'Host $host', 'X-Real-IP $remote_addr',
     'X-Forwarded-For $proxy_add_x_forwarded_for',
   ]
+  $nx_proxy_pass_headers      = false
+
 
   $nx_client_body_temp_path   = "${nx_run_dir}/client_body_temp"
   $nx_client_body_buffer_size = '128k'

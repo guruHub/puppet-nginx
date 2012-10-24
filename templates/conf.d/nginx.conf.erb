@@ -33,6 +33,13 @@ http {
   <%= geoip_dat_type %> <%= geoip_dat_destination %>;
   <% end -%>
 
+  <% if @real_ip_header %>
+  real_ip_header     <% real_ip_header;
+  <% end %>
+  <% if @real_ips %>
+  <% real_ips.each do |ip| -%> 
+  set_real_ip_from   <%= ip %>;
+  <% end %>
   include /etc/nginx/conf.d/*.conf;
   include /etc/nginx/vhost_autogen.conf;
 }

@@ -37,7 +37,9 @@ class nginx (
   $service_restart    = $nginx::params::nx_service_restart,
   $geoip_city_src     = $nginx::params::nx_geoip_city_src,
   $geoip_country_src  = $nginx::params::nx_geoip_country_src,
-  $debian_package     = $nginx::params::nx_debian_package
+  $debian_package     = $nginx::params::nx_debian_package,
+  $real_ip_header     = $nginx::params::nx_real_ip_header,
+  $real_ips           = $nginx::params::nx_real_ips
 ) inherits nginx::params {
 
   include stdlib
@@ -54,6 +56,8 @@ class nginx (
     confd_purge         => $confd_purge,
     geoip_city_src      => $geoip_city_src,
     geoip_country_src   => $geoip_country_src,
+    real_ip_header      => $real_ip_header,
+    real_ips            => $real_ips,
     require 		=> Class['nginx::package'],
     notify  		=> Class['nginx::service'],
   }

@@ -20,6 +20,8 @@ class nginx::config(
   $confd_purge         = $nginx::params::nx_confd_purge,
   $geoip_city_src      = $nginx::params::nx_geoip_city_src,
   $geoip_country_src   = $nginx::params::nx_geoip_country_src,
+  $real_ip_header      = $nginx::params::nx_real_ip_header,
+  $real_ips            = $nginx::params::nx_real_ips
 ) inherits nginx::params {
   File {
     owner => 'root',

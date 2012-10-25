@@ -1,6 +1,7 @@
 upstream <%= name %> {
-  <% if @fair_enabled %>fair;<% end -%>
-  <% members.each do |i| %>
+<% if @fair_enabled %>fair;<% end -%>
+<% members.each do |i| %>
   server <%= i %>;
-  <% end %>
+<% end %>
+<% if @keepalive %>  keepalive <%= keepalive %>;<% end %>
 }

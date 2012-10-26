@@ -28,7 +28,7 @@ define nginx::resource::cache (
     mode  => '0644',
   }
 
-  file { "/etc/nginx/conf.d/${name}-cache.conf":
+  file { "/etc/nginx/conf.d/${name}-cache_zone.conf":
     ensure   => $ensure ? {
       'absent' => absent,
       default  => 'file',
@@ -36,4 +36,5 @@ define nginx::resource::cache (
     content  => "proxy_cache_path ${storage_dir}/${name} levels=${levels} keys_zone=${keys_zone} inactive=${inactive} max_size=${max_size};\n",
     notify   => Class['nginx::service'],
   }
+
 }

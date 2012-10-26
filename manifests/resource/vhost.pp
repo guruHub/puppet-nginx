@@ -66,6 +66,9 @@ define nginx::resource::vhost(
   $ssl_key                = undef,
   $proxy                  = undef,
   $proxy_read_timeout     = $nginx::params::nx_proxy_read_timeout,
+  $proxy_cache            = false,
+  $proxy_cache_key        = false,
+  $proxy_cache_valid      = false,
   $index_files            = ['index.html', 'index.htm', 'index.php'],
   $server_name            = [$name],
   $www_root               = undef,
@@ -76,6 +79,7 @@ define nginx::resource::vhost(
   $access_logs            = undef,
   $charset                = undef,
   $vhost_cfg_prepend      = false
+
 ) {
 
   File {
@@ -116,6 +120,9 @@ define nginx::resource::vhost(
     location             => '/',
     proxy                => $proxy,
     proxy_read_timeout   => $proxy_read_timeout,
+    proxy_cache          => false,
+    proxy_cache_key      => false,
+    proxy_cache_valid    => false,
     www_root             => $www_root,
     notify               => Class['nginx::service'],
   }

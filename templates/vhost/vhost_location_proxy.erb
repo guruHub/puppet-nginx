@@ -2,10 +2,14 @@
 <% if @location_cfg_prepend -%><% location_cfg_prepend.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>
-<% if @proxy_cache %>    proxy_cache <%= proxy_cache %>;<% end %>
-<% if @proxy_no_cache %>    proxy_no_cache <%= proxy_no_cache %>;<% end %>
-<% if @proxy_ignore_headers %>    proxy_ignore_headers<% proxy_ignore_headers.each do |i| -%> <%= i %><% end -%>;<% end %>
-<% if @proxy_cache_key %>    proxy_cache_key <%= proxy_cache_key %>;<% end %>
+<% if @proxy_cache %>    proxy_cache <%= proxy_cache %>;
+<% end -%>
+<% if @proxy_no_cache %>    proxy_no_cache <%= proxy_no_cache %>;
+<% end -%>
+<% if @proxy_ignore_headers %>    proxy_ignore_headers<% proxy_ignore_headers.each do |i| -%> <%= i %><% end -%>;
+<% end -%>
+<% if @proxy_cache_key %>    proxy_cache_key <%= proxy_cache_key %>;
+<% end -%>
 <% if @proxy_cache_valid %><% proxy_cache_valid.each do |i| -%>
     proxy_cache_valid <%= i %>;
 <% end -%><% end -%>

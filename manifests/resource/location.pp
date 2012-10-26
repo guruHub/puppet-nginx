@@ -61,7 +61,10 @@ define nginx::resource::location(
   $location_cfg_append  = undef,
   $location,
   $fpm                  = undef,
-  $geoip_enable         = undef
+  $geoip_enable         = undef,
+  $proxy_cache          = false,
+  $proxy_cache_valid    = false,
+  $expires              = false
 ) {
   File {
     owner  => 'root',

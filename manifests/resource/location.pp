@@ -65,8 +65,10 @@ define nginx::resource::location(
   $proxy_cache          = false,
   $proxy_cache_key      = false,
   $proxy_cache_valid    = false,
+  $proxy_ignore_headers = false,
+  $proxy_no_cache       = false,
   $expires              = false,
-  $priority             = 500,
+  $priority             = 500
 ) {
   File {
     owner  => 'root',

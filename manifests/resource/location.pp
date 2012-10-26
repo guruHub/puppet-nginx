@@ -64,7 +64,8 @@ define nginx::resource::location(
   $geoip_enable         = undef,
   $proxy_cache          = false,
   $proxy_cache_valid    = false,
-  $expires              = false
+  $expires              = false,
+  $priority             = 500,
 ) {
   File {
     owner  => 'root',
@@ -104,7 +105,7 @@ define nginx::resource::location(
   }
 
   ## Create stubs for vHost File Fragment Pattern
-  file {"${nginx::config::nx_temp_dir}/nginx.d/${vhost}-500-${name}":
+  file {"${nginx::config::nx_temp_dir}/nginx.d/${vhost}-${priority}-${name}":
     ensure  => $ensure_real,
     content => $content_real,
   }

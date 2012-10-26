@@ -8,6 +8,7 @@
 <% end -%><% end -%>
     proxy_read_timeout <%= proxy_read_timeout %>;
     proxy_pass <%= proxy %>;
+<% if @expires %>    expires <%= expires %>;<% end %>
 <% if @location_cfg_append -%><% location_cfg_append.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>

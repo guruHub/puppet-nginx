@@ -69,6 +69,8 @@ define nginx::resource::vhost(
   $proxy_cache            = false,
   $proxy_cache_key        = false,
   $proxy_cache_valid      = false,
+  $proxy_ignore_headers   = false,
+  $proxy_no_cache         = false,
   $index_files            = ['index.html', 'index.htm', 'index.php'],
   $server_name            = [$name],
   $www_root               = undef,
@@ -123,6 +125,8 @@ define nginx::resource::vhost(
     proxy_cache          => false,
     proxy_cache_key      => false,
     proxy_cache_valid    => false,
+    proxy_ignore_headers => false,
+    proxy_no_cache       => false,
     www_root             => $www_root,
     notify               => Class['nginx::service'],
   }

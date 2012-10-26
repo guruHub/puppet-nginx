@@ -63,6 +63,7 @@ define nginx::resource::location(
   $fpm                  = undef,
   $geoip_enable         = undef,
   $proxy_cache          = false,
+  $proxy_cache_key      = false,
   $proxy_cache_valid    = false,
   $expires              = false,
   $priority             = 500,

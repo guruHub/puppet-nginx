@@ -33,7 +33,7 @@ define nginx::resource::cache (
       'absent' => absent,
       default  => 'file',
     },
-    content  => "proxy_cache_path ${storage_dir}${name} levels=${levels} keys_zone=${keys_zone} inactive=${inactive} max_size=${max_size};\n",
+    content  => "proxy_cache_path ${storage_dir}/${name} levels=${levels} keys_zone=${keys_zone} inactive=${inactive} max_size=${max_size};\n",
     notify   => Class['nginx::service'],
   }
 }

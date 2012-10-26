@@ -29,6 +29,7 @@
 #   [*accesslogs*]          - This module always set by default an access log "${name}-access.log" using default format on default 
 #                             log_dir. With this setting you can override default log with custom ones, it expects a hash where each
 #                             key is the name of the log and value the format for it.
+#   [*vhost_cfg_prepend*]   - If used it expects an array with custom configuration to place before locations, does nothing by default
 #
 # Actions:
 #
@@ -73,7 +74,8 @@ define nginx::resource::vhost(
   $location_cfg_append    = undef,
   $error_log              = undef,
   $access_logs            = undef,
-  $charset                = undef
+  $charset                = undef,
+  $vhost_cfg_prepend      = false
 ) {
 
   File {

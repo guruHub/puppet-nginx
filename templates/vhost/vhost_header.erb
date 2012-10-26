@@ -17,3 +17,6 @@ server {
   <% if @charset -%>
   charset                <%= charset %>;
   <% end %>
+<% if @vhost_cfg_prepend -%><% vhost_cfg_prepend.each do |i| -%>
+  <%= i %>;
+<% end -%><% end -%>

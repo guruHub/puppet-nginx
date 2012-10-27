@@ -66,7 +66,7 @@ define nginx::resource::location(
   $proxy_cache_key      = false,
   $proxy_cache_valid    = false,
   $proxy_ignore_headers = false,
-  $proxy_no_cache       = false,
+  $proxy_cache_bypass   = false,
   $expires              = false,
   $priority             = 500
 ) {

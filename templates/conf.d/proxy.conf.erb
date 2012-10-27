@@ -13,6 +13,8 @@ proxy_buffers           <%= proxy_buffers %>;
 <% end -%>
 <% if @proxy_busy_buffers_size %>proxy_busy_buffers_size <%= proxy_busy_buffers_size %>;
 <% end -%>
+<% if @proxy_cache_use_stale %>proxy_cache_use_stale <%= proxy_cache_use_stale %>;
+<% end -%>
 <% proxy_set_header.each do |header| %>proxy_set_header        <%= header %>;
 <% end -%>
 <% if @geoip_city_src %>

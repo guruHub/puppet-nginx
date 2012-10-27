@@ -17,3 +17,7 @@ proxy_set_header Geo-Country-Name $geoip_city_country_name;
 proxy_set_header Geo-Region $geoip_region;
 proxy_set_header Geo-City $geoip_city;
 <% end %>
+<% if @limit_conn_zone %>limit_conn_zone <%= limit_conn_zone %>;
+<% end -%>
+<% if @limit_conn %>limit_conn <%= limit_conn %>;
+<% end -%>

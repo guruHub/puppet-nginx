@@ -26,7 +26,10 @@ http {
 
   <% if scope.lookupvar('nginx::params::nx_gzip') == 'on' %> 
   gzip         on;
+  gzip_proxied any;
   gzip_disable "MSIE [1-6]\.(?!.*SV1)";
+  gzip_types   "text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript image/svg+xml";
+  gzip_vary    on;
   <% end %>
 
   <% if @geoip_dat_destination %>

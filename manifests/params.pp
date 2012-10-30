@@ -75,6 +75,6 @@ class nginx::params {
   # Warning, don't enable following directives for versions earlier than 1.1.8, directive
   # names changed on 1.1.8. This would work only on Nginx 1.1.8+
   $nx_limit_conn_zone  = false
-  $nx_limit_conn = falses
+  $nx_limit_conn = false
 
 }

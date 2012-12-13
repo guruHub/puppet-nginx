@@ -68,6 +68,7 @@ define nginx::resource::location(
   $proxy_ignore_headers = false,
   $proxy_cache_bypass   = false,
   $expires              = false,
+  $purge                = undef,
   $priority             = 500
 ) {
   File {
@@ -92,6 +93,8 @@ define nginx::resource::location(
     $content_real = template('nginx/vhost/vhost_location_stub_status.erb')
   } elsif ($fpm != undef) {
     $content_real = template('nginx/vhost/vhost_location_fpm.erb')
+  } elsif ($purge != undef) {
+    $content_real = template('nginx/vhost/vhost_location_purge.erb')
   } else {
     $content_real = template('nginx/vhost/vhost_location_directory.erb')
   }
@@ -100,13 +103,15 @@ define nginx::resource::location(
   if ($vhost == undef) {
     fail('Cannot create a location reference without attaching to a virtual host')
   }
-  if (($www_root == undef) and ($proxy == undef) and ($location_alias == undef) and ($stub_status == undef) ) {
+  if (($www_root == undef) and ($proxy == undef) and ($location_alias == undef) and ($stub_status == undef) and ($purge == undef) ) {
     fail('Cannot create a location reference without a www_root, proxy, location_alias or stub_status defined')
   }
   if (($www_root != undef) and ($proxy != undef)) {
     fail('Cannot define both directory and proxy in a virtual host')
   }
-
+  if (($proxy != undef) and ($purge != undef)) {
+    fail('Cannot define a purge location while proxying at the same time')
+  }
   ## Create stubs for vHost File Fragment Pattern
   file {"${nginx::config::nx_temp_dir}/nginx.d/${vhost}-${priority}-${name}":
     ensure  => $ensure_real,

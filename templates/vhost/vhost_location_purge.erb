@@ -2,7 +2,7 @@
 <% if @location_cfg_prepend -%><% location_cfg_prepend.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>
-    proxy_cache_purge <%= proxy_cache %> <%= proxy_cache_key %>
+    proxy_cache_purge <%= proxy_cache %> <%= proxy_cache_key %>;
 <% if @location_cfg_append -%><% location_cfg_append.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>

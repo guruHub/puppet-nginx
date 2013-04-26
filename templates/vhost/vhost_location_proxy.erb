@@ -16,6 +16,10 @@
     proxy_read_timeout <%= proxy_read_timeout %>;
     proxy_pass <%= proxy %>;
 <% if @expires %>    expires <%= expires %>;<% end %>
+    add_header BM-Cache-Status "$upstream_cache_status";
+    add_header BM-Cache-Node "$hostname";
+    add_header BM-Cache-BackendNode "$upstream_addr";
+    add_header BM-Cache-BackendTime "$upstream_response_time";
 <% if @location_cfg_append -%><% location_cfg_append.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>

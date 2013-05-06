@@ -6,6 +6,8 @@
 <% end -%>
 <% if @proxy_cache_bypass %>    proxy_cache_bypass <%= proxy_cache_bypass %>;
 <% end -%>
+<% if @proxy_no_cache %>    proxy_no_cache <%= proxy_no_cache %>;
+<% end -%>
 <% if @proxy_ignore_headers %>    proxy_ignore_headers<% proxy_ignore_headers.each do |i| -%> <%= i %><% end -%>;
 <% end -%>
 <% if @proxy_cache_key %>    proxy_cache_key <%= proxy_cache_key %>;

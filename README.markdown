@@ -1,6 +1,6 @@
 # NGINX Module
 
-James Fryman <jamison@puppetlabs.com>
+James Fryman <james@frymanet.com>
 
 This module manages NGINX from within Puppet.
 
@@ -44,4 +44,25 @@ Add a Proxy Server(s)
        proxy  => 'http://puppet_rack_app',
      }
    } 
+</pre>
+
+Add an smtp proxy
+<pre>
+   node default {
+     class { 'nginx':
+       mail => true,
+     }
+     nginx::resource::mailhost { 'domain1.example':
+       ensure      => present,
+       auth_http   => 'server2.example/cgi-bin/auth',
+       protocol    => 'smtp',
+       listen_port => 587,
+       ssl_port    => 465,
+       starttls    => 'only',
+       xclient     => 'off',
+       ssl         => 'true',
+       ssl_cert    => '/tmp/server.crt',
+       ssl_key     => '/tmp/server.pem',
+     }
+   }
 </pre>

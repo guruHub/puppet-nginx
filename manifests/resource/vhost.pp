@@ -104,15 +104,18 @@ define nginx::resource::vhost(
     }
   }
 
+
   # Use the File Fragment Pattern to construct the configuration files.
   # Create the base configuration file reference.
-  file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-001":
-    ensure  => $ensure ? {
-      'absent' => absent,
-      default  => 'file',
-    },
-    content => template('nginx/vhost/vhost_header.erb'),
-    notify => Class['nginx::service'],
+  if ($ssl != 'true') {
+    file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-001":
+      ensure  => $ensure ? {
+        'absent' => absent,
+        default  => 'file',
+      },
+      content => template('nginx/vhost/vhost_header.erb'),
+      notify => Class['nginx::service'],
+    }
   }
 
   # Create the default location reference for the vHost
@@ -144,14 +147,17 @@ define nginx::resource::vhost(
       location_cfg_append => $location_cfg_append
     }
   }
+
   # Create a proper file close stub.
-  file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-699":
-    ensure  => $ensure ? {
-      'absent' => absent,
-      default  => 'file',
-    },
-    content => template('nginx/vhost/vhost_footer.erb'),
-    notify  => Class['nginx::service'],
+  if ($ssl != 'true') {
+    file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-699":
+      ensure  => $ensure ? {
+        'absent' => absent,
+        default  => 'file',
+      },
+      content => template('nginx/vhost/vhost_footer.erb'),
+      notify  => Class['nginx::service'],
+    }
   }
 
   # Create SSL File Stubs if SSL is enabled

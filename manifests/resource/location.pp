@@ -113,15 +113,16 @@ define nginx::resource::location(
   if (($proxy != undef) and ($purge != undef)) {
     fail('Cannot define a purge location while proxying at the same time')
   }
-  ## Create stubs for vHost File Fragment Pattern
-  file {"${nginx::config::nx_temp_dir}/nginx.d/${vhost}-${priority}-${name}":
-    ensure  => $ensure_real,
-    content => $content_real,
-  }
 
   ## Only create SSL Specific locations if $ssl is true.
   if ($ssl == 'true') {
     file {"${nginx::config::nx_temp_dir}/nginx.d/${vhost}-800-${name}-ssl":
+      ensure  => $ensure_real,
+      content => $content_real,
+    }
+  } else {
+    ## Create stubs for vHost File Fragment Pattern
+    file {"${nginx::config::nx_temp_dir}/nginx.d/${vhost}-${priority}-${name}":
       ensure  => $ensure_real,
       content => $content_real,
     }

@@ -124,6 +124,7 @@ define nginx::resource::vhost(
     vhost                => $name,
     ssl                  => $ssl,
     location             => '/',
+    index_files		 => $index_files,
     proxy                => $proxy,
     proxy_read_timeout   => $proxy_read_timeout,
     proxy_cache          => $proxy_cache,

@@ -71,6 +71,7 @@ define nginx::resource::vhost(
   $proxy_cache_valid      = false,
   $proxy_ignore_headers   = false,
   $proxy_cache_bypass     = false,
+  $proxy_no_cache	  = false,
   $index_files            = ['index.html', 'index.htm', 'index.php'],
   $server_name            = [$name],
   $www_root               = undef,
@@ -103,15 +104,18 @@ define nginx::resource::vhost(
     }
   }
 
+
   # Use the File Fragment Pattern to construct the configuration files.
   # Create the base configuration file reference.
-  file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-001":
-    ensure  => $ensure ? {
-      'absent' => absent,
-      default  => 'file',
-    },
-    content => template('nginx/vhost/vhost_header.erb'),
-    notify => Class['nginx::service'],
+  if ($ssl != 'true') {
+    file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-001":
+      ensure  => $ensure ? {
+        'absent' => absent,
+        default  => 'file',
+      },
+      content => template('nginx/vhost/vhost_header.erb'),
+      notify => Class['nginx::service'],
+    }
   }
 
   # Create the default location reference for the vHost
@@ -120,6 +124,7 @@ define nginx::resource::vhost(
     vhost                => $name,
     ssl                  => $ssl,
     location             => '/',
+    index_files		 => $index_files,
     proxy                => $proxy,
     proxy_read_timeout   => $proxy_read_timeout,
     proxy_cache          => $proxy_cache,
@@ -127,6 +132,7 @@ define nginx::resource::vhost(
     proxy_cache_valid    => $proxy_cache_valid,
     proxy_ignore_headers => $proxy_ignore_headers,
     proxy_cache_bypass   => $proxy_cache_bypass,
+    proxy_no_cache       => $proxy_no_cache,
     www_root             => $www_root,
     notify               => Class['nginx::service'],
   }
@@ -142,14 +148,17 @@ define nginx::resource::vhost(
       location_cfg_append => $location_cfg_append
     }
   }
+
   # Create a proper file close stub.
-  file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-699":
-    ensure  => $ensure ? {
-      'absent' => absent,
-      default  => 'file',
-    },
-    content => template('nginx/vhost/vhost_footer.erb'),
-    notify  => Class['nginx::service'],
+  if ($ssl != 'true') {
+    file { "${nginx::config::nx_temp_dir}/nginx.d/${name}-699":
+      ensure  => $ensure ? {
+        'absent' => absent,
+        default  => 'file',
+      },
+      content => template('nginx/vhost/vhost_footer.erb'),
+      notify  => Class['nginx::service'],
+    }
   }
 
   # Create SSL File Stubs if SSL is enabled

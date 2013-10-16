@@ -6,6 +6,8 @@
 <% end -%>
 <% if @proxy_cache_bypass %>    proxy_cache_bypass <%= proxy_cache_bypass %>;
 <% end -%>
+<% if @proxy_no_cache %>    proxy_no_cache <%= proxy_no_cache %>;
+<% end -%>
 <% if @proxy_ignore_headers %>    proxy_ignore_headers<% proxy_ignore_headers.each do |i| -%> <%= i %><% end -%>;
 <% end -%>
 <% if @proxy_cache_key %>    proxy_cache_key <%= proxy_cache_key %>;
@@ -16,6 +18,10 @@
     proxy_read_timeout <%= proxy_read_timeout %>;
     proxy_pass <%= proxy %>;
 <% if @expires %>    expires <%= expires %>;<% end %>
+    add_header BM-Cache-Status "$upstream_cache_status";
+    add_header BM-Cache-Node "<%= scope.lookupvar("::hostname") %>";
+    add_header BM-Cache-BackendNode "$upstream_addr";
+    add_header BM-Cache-BackendTime "$upstream_response_time";
 <% if @location_cfg_append -%><% location_cfg_append.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>

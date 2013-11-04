@@ -21,6 +21,7 @@ class nginx::params {
   $nx_confd_purge             = false
   $nx_worker_processes        = 1
   $nx_worker_connections      = 1024
+  $nx_worker_rlimit_nofile    = 4096
   $nx_types_hash_max_size     = 1024
   $nx_types_hash_bucket_size  = 512
   $nx_names_hash_bucket_size  = 64

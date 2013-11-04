@@ -31,6 +31,7 @@
 class nginx (
   $worker_processes       = $nginx::params::nx_worker_processes,
   $worker_connections     = $nginx::params::nx_worker_connections,
+  $worker_rlimit_nofile   = $nginx::params::nx_worker_rlimit_nofile,
   $package_name           = $nginx::params::package_name,
   $package_ensure         = $nginx::params::package_ensure,
   $package_source         = $nginx::params::package_source,

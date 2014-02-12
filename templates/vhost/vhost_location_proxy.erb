@@ -22,6 +22,7 @@
     add_header BM-Cache-Node "<%= scope.lookupvar("::hostname") %>";
     add_header BM-Cache-BackendNode "$upstream_addr";
     add_header BM-Cache-BackendTime "$upstream_response_time";
+    add_header BM-Cache-Key "<%= proxy_cache_key %>";
 <% if @location_cfg_append -%><% location_cfg_append.each do |i| -%>
     <%= i %>;
 <% end -%><% end -%>

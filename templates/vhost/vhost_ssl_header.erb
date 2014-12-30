@@ -1,16 +1,10 @@
 server {
-  listen       443;
-  <% if ipv6_enable == 'true' && (defined? ipaddress6) %>listen [<%= ipv6_listen_ip %>]:<%= ipv6_listen_port %> default ipv6only=on;<% end %>
+  listen       443 <% if @listen_options %><%= @listen_options %><% end %>;
+  <% # check to see if ipv6 support exists in the kernel before applying %>
+  <% if ipv6_enable == 'true' && (defined? ipaddress6) %>
+  listen [<%= ipv6_listen_ip %>]:<%= ipv6_listen_port %> default ipv6only=on;
+  <% end %>
   server_name           <%= rewrite_www_to_non_www ? name.gsub(/^www\./, '') : server_name.join(" ") %>;
-  <% if ! @access_logs %>
-  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/ssl-<%= name %>.access.log;
-  <% else %>
-  <% access_logs.sort.each do |logfile,logformat| %>
-  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= logfile %>.access.log <%= logformat %>;<% end -%>
-  <% end -%>
-  <% if @error_log %>
-  error_log             <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.error.log;
-  <% end -%>
 
   ssl on;
   ssl_certificate      <%= ssl_cert %>;
@@ -21,3 +15,19 @@ server {
   ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;
   ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv3:+EXP;
   ssl_prefer_server_ciphers   on;
+
+  <% if @www_root -%>
+  root  <%= www_root %>;
+  <% end -%>
+  <% if ! @access_logs %>
+  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.access.log; 
+  <% else %>
+  <% access_logs.sort.each do |logfile,logformat| %>
+  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= logfile %>.access.log <%= logformat %>;<% end -%>
+  <% end -%>
+  <% if @error_log %>
+  error_log             <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.error.log;
+  <% end -%>
+
+
+

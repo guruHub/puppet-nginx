@@ -28,6 +28,6 @@ server {
   <% if @error_log %>
   error_log             <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.error.log;
   <% end -%>
-
-
-
+<% if @vhost_cfg_prepend -%><% vhost_cfg_prepend.each do |i| -%>
+  <%= i %>;
+<% end -%><% end -%>
